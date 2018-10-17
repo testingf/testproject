@@ -1,0 +1,15 @@
+<div>
+  <button id="button1" onclick="go()">Go</button>
+</div>
+<script>
+  function go()
+  {
+    var number = window.location.href.indexOf("?c=");
+    var company = window.location.href.substring(number+3)
+    if(number>=0)
+    {
+      window.location.href = "/test2?c=" + company;
+    }
+  }
+  
+</script>
