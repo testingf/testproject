@@ -1,0 +1,175 @@
+<div class="container default-page-template">
+   <div class="row">
+      <div class="clearfix"></div>
+      <div class="default-page-container container cartContain">
+        <div class="deBreadcrumbs hidden-sm hidden-xs col-lg-12 col-md-12 pn">
+			<ul>
+				<li><a href="/"><img src="/media/images/logo.png" alt="home"></a></li>
+				<li>Shopping Cart</li>
+			</ul>
+		</div>
+         <div class="checkoutHeadRow col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+				<h2>My Cart</h2>
+			</div>
+			<div class="statusBar col-lg-8 col-md-6 col-sm-12 hidden-xs">
+              	<div>
+                  <a>
+                    <img src="/media/images/co-oc.png">
+                    <h5>ORDER COMPLETE</h5>
+                  </a>sdfgsd
+                </div>
+                <img src="/media/images/co-arrow.png">
+                <div>
+                  <a>
+                    <img src="/media/images/co-or.png">
+                    <h5>ORDER REVIEW</h5>
+                  </a>
+                </div>
+                <img src="/media/images/co-arrow.png">
+                <div>
+                  <a>
+                    <img src="/media/images/co-pi.png">
+                    <h5>PAYMENT INFO</h5>
+                  </a>
+                </div>
+                <img src="/media/images/co-arrow.png">
+                <div>
+                  <a>
+                    <img src="/media/images/co-sc.png">
+                    <h5>SHOPPING CART</h5>
+                  </a>
+                </div>
+			</div>
+		</div>
+         [@CartEmpty = 1]
+         [if @Cart]
+         [if @Cart.CartItems.Count > 0]
+                       <div class="cartProducts  col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        [@CartEmpty = '']
+                        [repeat @Cart.CartItems]
+                        [@CartItem = @Cart.CartItems]
+                        [@Variant = @CartItem.Variant]
+                        [@Product = @CartItem.Product]
+                        [@ColorAttribute = @Variant.FirstAttributeOfType("color-detailed")]
+                        [@MainImage = @Product.CartImage(@ColorAttribute)]
+                        
+
+                          <div class="cartLines col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="cartProductDetails col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<div class="cartProductImage col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                      [@ProductImage = @Product.ImageByType('Cart')]
+                                      <a href="[@Product.URL]" data-lightbox="images"><img class="img-responsive cart-image" src="[@ProductImage.URL]" alt="[@ProductImage.Name]"></a>
+									</div>
+									<div class="cartProductInfo col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<div class="cartInfoBox">
+											<div class="makerName">
+                                              <a href='/our-brands/[@Product.Brand.SEOName]'>[@Product.Brand]</a>
+											</div>
+											<div>
+												<a class="product-title" href="[@Product.URL]">[@Product.Name]</a>
+											</div>
+											<div class="saveForLater">
+												save for later
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="cartProductDetailsRight col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                      <form class="change-qty" action="/Cart/UpdateItems" method="post">
+                                        <input type="number" class="form-control" id="cart-[@CartItem.Oid]" value="[@CartItem.Quantity]" name="qty[@CartItem.Oid]" onchange="$(this).closest('form').submit()" size="4">
+                                      </form>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+										<span>[$CartHelper.ItemTotal(@CartItem)]</span>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                      <a href="/cart/delete?deletedIDs=[@CartItem.Oid]" class="pull-right cartremovelink delete-btn-x" title="Remove this item"><img src="/media/images/trash.png" alt="remove"></a>
+									</div>
+									</div>
+								</div>
+							</div>
+                        [end repeat]
+                         <div class="continueShopping">
+								<span><a href="/">CONTINUE SHOPPING</a></span>
+							</div>
+                       </div>
+                       <div class="cartSide col-lg-4 col-md-4 col-sm-12">
+                         	<div class="applyCoupon">
+								<h4>DISCOUNT CODES</h4>
+                                <form action="/cart/applypromotion" method="post">
+								  <div class="input-group">
+								    <input type="text" class="form-control" name="code" placeholder="Coupon Code">
+								    <span class="input-group-btn">
+									  <button class="btn btn-default" type="submit">Apply</button>
+								    </span>
+								  </div>
+                                </form>
+							</div>
+                         	<div class="applyCoupon">
+								<h4>GIFT CERTIFICATES / STORE CREDIT</h4>
+                                <form action="/cart/ApplyGiftCertificate" method="post">
+								  <div class="input-group">
+								    <input type="text" class="form-control" name="code" placeholder="Code">
+								    <span class="input-group-btn">
+									  <button class="btn btn-default" type="submit">Apply</button>
+								    </span>
+								  </div>
+                                </form>
+							</div>
+                         	<div class="cartOrderTotals">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>SUBTOTAL:</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>[$CartHelper.GetSubTotal()]</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>TAX:</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>[$CartHelper.GetTax()]</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>DISCOUNT:</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>-[$CartHelper.GetPromotionalSavings()]</span>
+								</div>
+                                [@GCAmt = @CartHelper.GiftCertificateAmount()]
+                                [if @GCAmt > 0]
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>GIFT CERTIFICATES:</span>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>[$GCAmt]</span>
+								</div>
+                                [end if]
+								<div class="grandTotal col-lg-6 col-md-6 col-sm-6 col-xs-6" style="clear: left;">
+									<span>GRAND TOTAL:</span>
+								</div>
+								<div class="grandTotal col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span>[$CartHelper.PaymentMethodCharge()]</span>
+								</div>
+								<div class="checkoutButtonArea col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <form action="/checkout" method="get">
+                                    <input type="submit" class="checkoutButton" name="proceed" value="Checkout">
+                                 </form>
+								</div>
+							</div>							
+						</div>
+                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="76b0e835b0"><input type="hidden" name="_wp_http_referer" value="/cart/">			
+                     </div>
+                  </div>
+  					 [end if]
+                     [end if]
+                     [if @CartEmpty]
+  					 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                       <p class="cart-empty">Your cart is currently empty. Lets fill it up!</p>
+                       <p class="return-to-shop"><a href="/" class="text-red">Start Shopping ></a></p>
+                     </div>
+                     [end if]
+               </div>
+        
