@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="row">
+		<div class='accountContain col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+			<div class='row'>
+				<div class="deBreadcrumbs hidden-sm hidden-xs col-lg-12 col-md-12 no-pad">
+					<ul>
+						<li><img src='/media/images/new-design/logo.png' alt='home' style="margin-right:5px;" /></li>
+						<li>[#Macro("Breadcrumb")]</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class='accountSideArea  col-lg-4 col-md-4 col-sm-12 col-xs-12 '>
+					<div class='sideHead'><h3>My Account</h3></div>
+					<div class='sideBelow hidden-sm hidden-xs' >
+						<ul>
+							<li [if @PagePath = "/account"]class="active"[end if]><a href="/account">Home</a></li>
+							<li [if @PagePath = "/account/edit-profile"]class="active"[end if]><a href="/account/edit-profile">Edit Profile</a></li>
+							<!--<li [if @PagePath = "/account/coupons"]class="active"[end if]><a href="/account/coupons">My Coupons</a></li>-->
+							<li [if @PagePath = "/account/order-history"]class="active"[end if]><a href="/account/order-history">Order History</a></li>
+							<li [if @PagePath = "/account/wishlist"]class="active"[end if]><a href="/account/aisle">My Aisle</a></li>
+							<li> <a href="/account/Logout">Log Out</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class='accountMainArea  col-lg-8 col-md-8 col-sm-12 col-xs-12 '>
+				   [if @ContentName]
+					  [#Include(@ContentName)]
+                   [else]
+                  	[if @PagePath = "/account"]
+                  		[#Include("account_home")]
+                  	[end if]dghf
+                  	[if @PagePath = "/account/order-history"]
+                  		[#Include("account_order_history")]
+                  	[end if]
+                  	[if @PagePath = "/account/account-order-details"]
+                  		[#Include("account_order_details")]
+                  	[end if]
+                  [if @PagePath = "/account/coupons"]
+                  		[#Include("account_coupons")]
+                  	[end if]
+				  [end if]
+				<div class='accountAreaBottom col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+                 <h4>While you're here, checkout out some of our favorite products!</h4>
+                 [#Macro("Account Category Carousel","Popular Maker Products")]
+              </div>
+			</div>
+		</div>
+	</div>
+</div>
