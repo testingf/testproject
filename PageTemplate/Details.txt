@@ -1,0 +1,350 @@
+<link href="/media/css/threesixty.css" rel="stylesheet" />
+<script src="/media/js/jszoom_uncompressed.js"></script>
+<script src="/media/js/threesixty.min.js"></script>
+<script type="text/javascript">
+var pr_style_sheet="//cdn.powerreviews.com/aux/48795/763544/css/express.css";
+</script>
+<script type="text/javascript" src="//cdn.powerreviews.com/repos/48795/pr/pwr/engine/js/full.js"></script>
+[@VariantColour = @Variant.FirstAttributeOfType("color-detailed")]
+[@MainImage = @Product.MainImageByAttribute(@VariantColour)]
+[@ZoomImageUrl = @Product.ZoomImageUrl(@VariantColour)]
+[#Include("Top Promo")]
+[#Include("Left Promo")]
+[#Include("Right Promo")]
+AS TEST ASdddd
+<div itemscope itemtype="http://schema.org/Product">
+	<meta itemprop="url" content="[@SiteUrl][@Product.Url]" />
+	<meta itemprop="brand" content="Delsey" />
+	<meta itemprop="name" content="[@Product.Brand] [@Product.Name]" />
+	<meta itemprop="price" content="[if @Variant.OnSale][@Variant.SalePrice][else][@Variant.UnitSell][end if]" />
+	<meta itemprop="priceCurrency" content="USD" />
+	<meta itemprop="standardPrice" content="[@Variant.UnitSell]" />
+	<meta itemprop="color" content="[@VariantColour.Display]" />
+	<meta itemprop="availability" itemtype="http://schema.org/ItemAvailability" content="[if @Variant.InStock]http://schema.org/InStock[else]http://schema.org/OutOfStock[end if]" />
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 details-pictures-holder clearfix">
+      <div class="vertical-slider">
+        <div class="button-up">
+          <i class="fa fa-angle-up fa-2x hide"></i>
+        </div>
+        <div class="slider-holder">
+          <div class="slider">
+	 	    <a href="#" onclick="loadProductImage('[@MainImage.URL]', '[@ZoomImageUrl]')">
+	 		  <img src="[@MainImage.URL]" class="image" />
+	 	    </a>
+            [@Images360 = @Product.ImagesByTypeAndAttribute("Large360", @VariantColour)]
+	        [@Thumbnails = @Product.ThumbnailsByAttribute(@VariantColour)]
+            [repeat @Thumbnails]
+            	[@Thumbnail = @Thumbnails]
+	        	[if @Thumbnail.Alternate = 0]
+	   			[else]
+           			[@FullImage = @Product.AlternateImageByTypeAndAttribute(@Thumbnail.Alternate, "Product", @VariantColour)]
+           			[@ZoomAltImage = @Product.AlternateImageByTypeAndAttribute(@Thumbnail.Alternate, "ZoomAlt", @VariantColour)]
+	   				<a href="#" onclick="hide360(); loadProductImage('[@FullImage.URL]', '[@ZoomAltImage.URL]'); return false;">
+	 					<img src="[@Thumbnail.URL]" class="image" />
+	   				</a>
+            		[if @Index = 2]
+            			[if @Images360.Count > 1]
+            				<a href="#" onclick="show360(); return false;">
+	 							<img src="/media/images/360img.jpg" class="image" />
+	   						</a>
+            			[end if]
+            		[end if]
+	   			[end if]
+       		[end repeat]
+          </div>
+       	</div>
+       	<div class="button-down">
+			<i class="fa fa-angle-down fa-2x"></i>
+        </div>
+      </div>
+      <div id="magnifier_space">
+        <a id="image-link" href="[@ZoomImage]" data-lightbox="product-image">
+			<img itemprop="image" id="standard_image" src="[@MainImage.URL]" data-zoom="[@ZoomImage]" class="image" />
+			<div id="magnifying">
+				<img id="magnification_image" src="/media/jszoom/clear.gif" />
+				<div id="loading_anim"><img src="/media/jszoom/loading_zoom.gif" id="loading_anim_img" /> Loading...</div>
+			</div>
+			<img id="magnify_overlay" src="/media/jszoom/clear.gif" />
+			<img id="transparent" src="/media/jszoom/clear.gif" onMouseOver="jszoomlens.init(event, this);" />
+			<div id="optionsmenu" onMouseOut="this.style.display = 'none';" onMouseOver="this.style.display = 'block';">
+				<div id="advanced_settings" style="display: none">
+					<input type="checkbox" id="ydisable" value="false" onClick="vertical_horizontal_zoom(event, this.checked, this.id);" />Horizontal Zoom
+					<br />
+					<input type="checkbox" id="xdisable" value="false" onClick="vertical_horizontal_zoom(event, this.checked, this.id);" />Vertical Zoom
+					<br />
+					<input type="checkbox" id="overlay" onClick="toggleoverlay(event, this.checked);" />Lens Effect
+				</div>
+				<br />
+				<span style="font-size: 8px; color: #666">JS Zoom by Flori G. Seeger</span>
+			</div>
+		</a>
+        <div id="image-360" class="threesixty" style="display: none">
+          <div class="spinner">
+            <span>0%</span>
+          </div>
+          <ol class="threesixty_images"></ol>
+	    </div>
+      </div>
+      <script type="text/javascript">
+      	name_prefix = '';
+        image_path = '';
+        init_loading_sequence('[@MainImage.URL]','[@ZoomImageUrl]');
+        images_360 = [!String.Json(@Images360)];
+        images_360_names = $.map(images_360, function (i) {
+          return i.URL;
+        });
+      </script>
+      [if @Images360.Count > 1]
+      <script>
+        $(window).load(function () {
+          $('#image-360').ThreeSixty({
+            totalFrames: images_360.length, // Total no. of image you have for 360 slider
+            endFrame: images_360.length, // end frame for the auto spin animation
+            currentFrame: 1, // This the start frame for auto spin
+            imgList: '.threesixty_images', // selector for image list
+            imgArray: images_360_names,
+            progress: '.spinner', // selector to show the loading progress
+            navigation: true,
+            responsive: true,
+            width: 500,
+            height: 500
+          });
+        });
+        
+        function show360() {
+          $("#image-link").hide();
+          $("#image-360").show();
+          $('#image-360').data('ThreeSixty').responsive();
+        }
+        
+        function hide360() {
+          $("#image-360").hide();
+          $("#image-link").show();
+        }
+      </script>
+      [end if]
+    </div>
+    <div class="col-xs-12 visible-xs pn mt20 mb10">
+      <div class="details-social-xs clearfix">
+        	<div class="mr10">
+              <div class="fb-share-button ib" 
+                  data-href="[@SiteUrl][@Product.Url]" 
+                  data-layout="button">
+              </div>
+            </div>
+          	<div class="mr10">
+				[@TweetText = @String.Join("Delsey USA - ", @Product.Brand, " ", @Product.Name)]
+				<a class="twitter-share-button ib" href="https://twitter.com/intent/tweet?text=[@String.UrlEncode(@TweetText)]&url=[@SiteUrl][@Product.Url]">Tweet</a>
+            </div>
+          	<div class="">
+				<a href="https://www.pinterest.com/pin/create/button/">
+					<img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" class=" ib" />
+				</a>
+            </div>
+      </div>
+        </div>
+    <div class="col-sm-7">
+      <div class="col-xs-12 pn product">
+    	[@BrandSEO = @SEOHelper.ConvertToSEO(@Product.Brand)]
+		[@BrandPath = String.Join("/collections/",@BrandSEO)]
+        <span class="fs36 text-light">[@Product.Brand]</span>
+		<span class="fs12 mb10"><a href="[@BrandPath]">View entire collection</a></span>
+        <span class="fs18 text-dark text-left"><strong>[@Product.Name]</strong></span>
+        <span class="fs12 text-light">[@Product.Style]</span>
+		[@Highlights = @Product.DescriptionsByName("Highlights")]
+		[if all(@Highlights,@Highlights.Count)]
+		<div id="highlights" class="fs14 text-dark">
+			<ul>
+			[repeat @Highlights]
+				<li>[@Highlights]</li>
+			[end repeat]
+			</ul>
+		</div>
+		[end if]
+        <span class="fs18">[!Product.Price]</span><br/>
+        <hr/>
+      </div>
+      <div class="col-xs-5 col-sm-3 pn">
+		[@ColorGroup = @Product.AttributeGroupByName("color-detailed")]
+		[if @ColorGroup]
+		[repeat @ColorGroup.Attributes]
+		[@ColorAttribute = @ColorGroup.Attributes]
+		<a href="#" onclick="setVariantAttribute('[@ColorAttribute.Oid]')">
+			<img src="/media/images/swatch/colourmask.png" alt="[@ColorAttribute.Display]" style="background-color: [@ColorAttribute.Value]" class="colour-swatch pull-left[if @ColorAttribute.Oid = @VariantColour.Oid] variant-selected[end if]" />
+		</a>
+		[end repeat]
+		[end if]
+      </div>
+      <div class="col-xs-7 col-sm-5 col-md-4 col-lg-3 pn text-right">
+        QTY:&nbsp;&nbsp;
+        <div class="counter">
+          <button onclick="nudgeCartQuantity(-1, 'cartAddQuantity')">-</button>
+          <div><input type="text" id="cartAddQuantity" value="1"></div>
+          <button onclick="nudgeCartQuantity(1, 'cartAddQuantity')">+</button>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <button id="addToCart" class="btn btn-red" onclick="addToCart('[@Variant.Oid]')">ADD TO CART</button>
+      </div>
+      <div class="col-xs-12 pn">
+        <hr/>
+      </div>
+      <div class="col-xs-12 pn mb10">
+        <div class="col-xs-6 col-md-4 text-center pn">
+          &nbsp;
+        </div>
+        <div class="col-xs-6 col-md-4 text-right pn mb10">
+          <div class="product-compare"><a href="#" onclick="addToCompare('[@Product.Oid]'); $(this).hide();"><i class="fa fa-plus-square-o"></i> add to compare</a></div>
+        </div>
+        <div class="col-xs-12 hidden-xs pn mt10">
+        	<div class="pull-left mr10">
+              <div class="fb-share-button ib" 
+                  data-href="[@SiteUrl][@Product.Url]" 
+                  data-layout="button">
+              </div>
+            </div>
+          	<div class="pull-left mr10">
+				[@TweetText = @String.Join("Delsey USA - ", @Product.Brand, " ", @Product.Name)]
+				<a class="twitter-share-button ib" href="https://twitter.com/intent/tweet?text=[@String.UrlEncode(@TweetText)]&url=[@SiteUrl][@Product.Url]">Tweet</a>
+            </div>
+          	<div class="pull-left">
+				<a href="https://www.pinterest.com/pin/create/button/">
+					<img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" class=" ib" />
+				</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	[@TSALock = @Product.CustomField("tsaCombinationLock")]
+	[if @TSALock = "true"]
+	[else]
+	[@TSALock = ""]
+	[end if]
+  <div class="row hidden-xs">
+    <div id="docker"></div>
+    <div id="details-menu" class="col-xs-12 details-menu">
+		<div class="col-xs-3 col-md-2 col-md-offset-2"><a href="javascript:;" data-jump="specifications">SPECIFICATIONS</a></div>
+		[@CapacityImage = @Product.ImageByType("capacity")]
+		[if @CapacityImage.FileName]
+		<div class="col-xs-3 col-md-2"><a href="javascript:;" data-jump="capacity">CAPACITY</a></div>
+		[end if]
+		[@Video = @Product.CustomField("video")]
+		[if @Video]
+		<div class="col-xs-3 col-md-2"><a href="javascript:;" data-jump="video">VIDEO</a></div>
+		[end if]
+		<div class="col-xs-3 col-md-2"><a href="javascript:;" data-jump="reviews">REVIEWS</a></div>
+    </div>
+  </div>
+  <div class="row mt20">
+    <div class="col-xs-12 col-sm-6 product-specifications">
+      <div id="specifications" class="col-xs-12 mb20 fs18">SPECIFICATIONS</div>
+      [@Spec = @Variant.FirstAttributeOfType("Material")]
+      [if @Spec]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">MATERIAL</div>
+        <div class="col-xs-8 text-normal pn">[@Spec.Display]</div>
+      </div>
+      [end if]
+      [@Spec = @Product.CustomField("Overall Product Dimensions")]
+      [if @Spec]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">OVERALL DIMENSIONS</div>
+        <div class="col-xs-8 text-normal pn">[@Spec] inches</div>
+      </div>
+      [end if]
+      [@Height = @Product.CustomField("Height")]
+      [@Width = @Product.CustomField("Width")]
+      [@Depth = @Product.CustomField("Depth")]
+      [if @Height]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">BODY DIMENSIONS</div>
+        <div class="col-xs-8 text-normal pn">[@Height]x[@Width]x[@Depth] inches</div>
+      </div>
+      [end if]
+      [@Spec = @Product.CustomField("Weight")]
+      [if @Spec]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">WEIGHT</div>
+        <div class="col-xs-8 text-normal pn">[@Spec]</div>
+      </div>
+      [end if]
+	  [@Warranty = @Variant.FirstAttributeOfType("Warranty")]
+	  [if @Warranty]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">WARRANTY</div>
+        <div class="col-xs-8 text-normal pn">[@Warranty.Display]</div>
+      </div>
+	  [end if]
+      [@Spec = @Variant.FirstAttributeOfType("OWI")]
+      [if @Spec]
+	  [if @Spec.Display = "No"]
+	  [else]
+      <div class="col-xs-12">
+        <div class="col-xs-4 pn">OVERWEIGHT INDICATOR</div>
+        <div class="col-xs-8 text-normal pn">[@Spec.Display]</div>
+      </div>
+	  [end if]
+      [end if]
+      [@Spec = @Variant.FirstAttributeOfType("Laptop Sleeve")]
+      [if @Spec]
+	  [if @Spec.Code = "None"]
+	  [else]      
+	  <div class="col-xs-12">
+        <div class="col-xs-4 pn">LAPTOP SLEEVE</div>
+        <div class="col-xs-8 text-normal pn">[@Spec.Display]</div>
+      </div>
+	  [end if]
+      [end if]
+    </div>
+    <div class="col-xs-12 visible-xs mb20 mt20"></div>
+    [@MoreInformation = @Product.DescriptionByName("More Information")]
+    [if @MoreInformation]
+    [else]
+    [@MoreInformation = @Product.Description]
+    [end if]
+    <div class="col-xs-12 col-sm-6">
+      <p class="fs18">MORE INFORMATION</p>
+      <p class="text-light">[@MoreInformation]</p>
+    </div>
+    <div class="col-xs-12"><hr/></div>
+  </div>
+  [if @CapacityImage.FileName]
+  <div class="row" id="capacity">
+    <div class="col-xs-12">
+      <img src="[@CapacityImage.URL]" class="image"/>
+    </div>
+  </div>
+<!--    <div class="col-xs-12"><hr/></div>-->
+  [end if]
+  [if @Video]
+  <div class="row mb30" id="video">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <iframe width="854" height="480" class="image" src="[@Video]" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  [end if]
+	<div class="row mb20" id="reviews">
+		<div class="col-xs-12">
+			<div class="col-xs-12 fs18">REVIEWS</div>
+			<div class="col-xs-12 col-sm-10">
+				<div class="pr_review_summary">
+					<script type="text/javascript">POWERREVIEWS.display.engine(document, { pr_page_id : "[@Product.Style]" });</script>
+				</div>
+			</div>
+		</div>
+    	<div class="col-xs-12"><hr/></div>
+	</div>
+	[if @RelatedProducts]
+	<div class="row mb20">
+		<div class="col-xs-12">
+			[#Macro("Related Items")]
+		</div>
+	</div>
+	[end if]
+<link href="/media/css/reviews.css" rel="stylesheet">
+<script src="/media/js/sticky-menu.js"></script>
+<script src="/media/js/vertical-slider.js"></script>
+<script src="/media/lightbox/js/lightbox.min.js"></script>
+</div>
