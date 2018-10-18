@@ -11,5 +11,5 @@
       window.location.href = "/test2?c=" + company;
     }
   }
-  Revision revised!
+  
 </script>
