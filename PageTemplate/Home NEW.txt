@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" id="directeats">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Healthy Eats For All - Direct Eats</title>
+	<meta name="description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<link rel="canonical" href="//www.directeats.com/"/>
+	<meta property="og:locale" content="en_US"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="Healthy Eats For All - Direct Eats"/>
+	<meta property="og:description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<meta property="og:url" content="http://www.directeats.com/"/>
+	<meta property="og:site_name" content="Direct Eats"/>
+	<meta property="fb:app_id" content="459641250834643"/>
+	<meta property="og:image" content="http://www.directeats.com/wp-content/uploads/2014/04/Fondue-hands-3.jpg"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<meta name="twitter:title" content="Healthy Eats For All - Direct Eats"/>
+	<meta name="twitter:site" content="@directeats"/>
+	<meta name="twitter:domain" content="Direct Eats"/>
+	<meta name="twitter:image" content="http://www.directeats.com/wp-content/uploads/2014/04/Fondue-hands-3.jpg"/>
+	<meta name="twitter:creator" content="@directeats"/>
+	<link rel="shortcut icon" href="/media/images/favicon.ico">
+  
+  	<!-- Bootstrap -->
+    <link href="/media/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/media/font-awesome-4.6.3/css/font-awesome.min.css">	
+	
+	<!--check if this is all necessary-->
+	<link rel='stylesheet' id='smart-coupon-css' href='/media/css/smart-coupon.css' type='text/css' media='all'/>
+	<link rel='stylesheet' id='helper-css-php-css' href='/media/css/helper-minified.css.php.css' type='text/css' media='all'/>
+	<link rel='stylesheet' id='wc-bundle-style-css' href='/media/css/bundles-style.css?ver=4.11.4' type='text/css' media='all'/>
+  	<!----><link rel='stylesheet' id='css-php-css' href='/media/css/stylesheet.css' type='text/css' media='all'/>
+	<script type='text/javascript' src='/media/js/jquery/jquery-1.12.4.min.js'></script>
+	<script type='text/javascript' src='/media/js/jquery/jquery-migrate-1.2.1.min.js'></script>
+	<script type='text/javascript' src='/media/js/third-party.js'></script>
+	<script type='text/javascript' src='/media/js/jquery/jquery.flexslider-min-min.js'></script>
+	<script type='text/javascript' src='/media/js/general.js'></script>		
+	<style type="text/css">html{background:#ffffff!important;}</style>
+	<link href="/media/css/fonts.css" rel="stylesheet" type="text/css"/>
+  	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	
+  <style type="text/css">
+		#logo img{display:none;}.site-title{display:block!important;}.site-description{display:block!important;}
+	</style>
+	<link href="/media/css/shortcodes.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/custom.css" rel="stylesheet" type="text/css"/>
+	
+</head>
+<body class="home">
+<div id="wrapper" class="site-wrapper">
+	[#Component("topbar new")]
+	<header id="main-header" class="container">
+		<div class="row">
+			[#Component("header new")]
+			[#Component("navigation")]
+		</div>
+	</header>
+	<div>
+		[#Component("home hero carousel")]
+	</div>
+	<div class="container">
+		<div class="row">
+			[#Macro("Home Category Carousel","Feature","Feature Products")]
+		</div>
+	</div>
+	[#Component("footer")]
+</div>
+[#Macro("signinModal")]
+</body>
+</html>
