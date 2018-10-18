@@ -1,0 +1,136 @@
+<script>
+    $(document).ready(function() {
+		loadCatalog();
+    });
+    function calculate_ppu(price,unitQty,controlId) {
+      var ppu = parseFloat(price) / parseFloat(unitQty);
+      document.getElementById(controlId).innerHTML = "$"+ppu.toFixed(2); 
+    }
+</script>
+
+<div class="container">
+  <div class="row">
+    <div class="deBreadcrumbs hidden-sm hidden-xs col-lg-12 col-md-12 no-pad">
+      <ul>
+        <li><img src='/media/images/new-design/logo.png' alt='home' style="margin-right:5px;" /></li>
+        <li>[#Macro("Breadcrumb")]</li>
+      </ul>
+    </div>
+    <div class="filter-container col-lg-3 col-md-3 hidden-sm hidden-xs">
+      [if @CategoryList]
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4>Category <span class="pull-right active"></span></h4>
+        <ul class="filter-options active">
+          [repeat @CategoryList]
+          [@Category = @CategoryList]
+          <li>
+            <label>
+              <input type="checkbox" class="category-checkbox" value="[@Category.Category.Oid]"[if @Category.Selected] checked="checked"[end if] onclick="filterChange()"/>
+              [@Category.Page.Title]dfghdfgh
+            </label>
+          </li>
+          [end repeat]
+        </ul>
+      </div>
+      [end if]
+      [if @BrandList]
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4>Makers <span class="pull-right active"></span></h4>
+        <ul class="filter-options active">
+          [repeat @BrandList]
+          [@Brand = @BrandList.Brand]
+          <li>
+            <input type="checkbox" class="brand-checkbox" value="[@Brand.Oid]"[if @Brand.Selected] checked="checked"[end if] onclick="filterChange()">[@Brand.Name]
+          </li>
+          [end repeat]
+        </ul>
+      </div>
+      [end if]
+      [if @AttributeList]
+      [repeat @AttributeList]
+      [@AttributGroup = @AttributeList]
+      [if @AttributGroup.Display = "Diet & Allergens"] 
+      <div class="no-pad col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4>Diet/Lifestyle <span class="pull-right active"></span></h4>
+        <ul class="filter-options active">
+          [repeat @AttributGroup.Attributes] 
+          [@Attribute = @AttributGroup.Attributes]
+          <li>
+            <input type="checkbox" class="attribute-checkbox" value="[@Attribute.Oid]"[if @Attribute.Selected] checked="checked"[end if] onclick="filterChange()">[@Attribute.Display]
+          </li>
+          [end repeat]
+        </ul>
+      </div>
+      [end if]
+      [end repeat]
+      [end if]
+      <!--
+[if @FilterFeatures]
+[repeat @FilterFeatures]
+[@FeatureGroup = @FilterFeatures]
+[if @FeatureGroup.GroupName = "Diet Details"] 
+<div class="diet-filter">
+<h4 class="open">Diet/Lifestyle</h4>
+<ul class="drop">
+[repeat @FeatureGroup.Features] 
+[@Feature = @FeatureGroup.Features]
+<li>
+<input class="rbdiet feature-checkbox" type="checkbox" value="[@Feature.Oid]"[if @Feature.Selected] checked="checked"[end if] onclick="filterChange()">
+<div class="filler"></div>
+<div class="filler-text col-lg-9 no-pad">[@Feature.Name]</div>
+</li>
+[end repeat]
+</ul>
+</div>
+[end if]
+[end repeat]
+[end if]
+-->
+    </div>
+    <div class="arcprods-group col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3 class="arc-pagetitle">Search Results: <span style="color:#ce3539;">[@Query]</span></h3>
+        <div class="results-sort-pagenums no-pad col-lg-12 col-md-12 hidden-sm hidden-xs">
+          <div class="no-pad col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div>
+              [#Component("CategoryShowing")]
+            </div>
+          </div>
+          [if @SortPlugins]
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <form method="get">
+              <div>
+                <select id="sort-select-bad" name="orderby" class="form-control orderby" onchange="filterChange()">
+                  <option value="Rank"[if @Sort = 'Rank'] selected="selected"[end if]>Best Match</option>
+                  <option value="HighestPrice"[if @Sort = 'HighestPrice'] selected="selected"[end if]>Price High To Low</option>
+                  <option value="LowestPrice"[if @Sort = 'LowestPrice'] selected="selected"[end if]>Price Low To High</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          [end if]
+          [#Component("CategoryPager")]
+        </div>
+        <ul class="prodcontainer archiveprods">
+			[if All(@Results,@Results.Count)]
+			[repeat @Results]
+			[@Product = @Results.Product]
+			[@Variant = Product.Variants.First]
+			[#Component("Product - Grid List Item")]
+			[end repeat]
+			[end if]
+        </ul>
+        <div class="results-sort-pagenums col-lg-12 col-md-12 hidden-sm hidden-xs">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div>
+              [#Component("CategoryShowing")]
+            </div>
+          </div>
+          [#Component("CategoryPager")]
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+[#Component("wishlistModal")]
