@@ -12,5 +12,5 @@
     }
   }
   Another test
-  cancarevic
+  cancarev=ic
 </script>
