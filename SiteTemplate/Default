@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="no-js" lang="" id="directeats">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Healthy Eats For All - Direct Eats</title>
+	<meta name="description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<link rel="canonical" href="//www.directeats.com/"/>
+	<meta property="og:locale" content="en_US"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="Healthy Eats For All - Direct Eats"/>
+	<meta property="og:description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<meta property="og:url" content="http://www.directeats.com/"/>
+	<meta property="og:site_name" content="Direct Eats"/>
+	<meta property="fb:app_id" content="459641250834643"/>
+	<meta property="og:image" content="http://www.directeats.com/wp-content/uploads/2014/04/Fondue-hands-3.jpg"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:description" content="Direct Eats is the first wholesale marketplace for the specialty food industry, delivering products to consumers in pantry sized portions."/>
+	<meta name="twitter:title" content="Healthy Eats For All - Direct Eats"/>
+	<meta name="twitter:site" content="@directeats"/>
+	<meta name="twitter:domain" content="Direct Eats"/>
+	<meta name="twitter:image" content="http://www.directeats.com/wp-content/uploads/2014/04/Fondue-hands-3.jpg"/>
+	<meta name="twitter:creator" content="@directeats"/>
+	<link rel="shortcut icon" href="/media/images/favicon.ico">
+  
+  	<!-- Bootstrap -->
+    <link href="/media/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/media/font-awesome-4.6.3/css/font-awesome.min.css">
+		
+	<!--check if this is all necessary-->
+	<link rel='stylesheet' id='smart-coupon-css' href='/media/css/smart-coupon.css' type='text/css' media='all'/>
+	<link rel='stylesheet' id='helper-css-php-css' href='/media/css/helper-minified.css.php.css' type='text/css' media='all'/>
+	<link rel='stylesheet' id='wc-bundle-style-css' href='/media/css/bundles-style.css?ver=4.11.4' type='text/css' media='all'/>
+  	<link rel='stylesheet' id='css-php-css' href='/media/css/stylesheet_rw.css' type='text/css' media='all'/>
+  	<!--<link rel='stylesheet' id='css-php-css' href='//www.directeats.com/wp-content/themes/mystile-child/de-css/minified.css.php?ver=4.3.1' type='text/css' media='all'/>-->
+	<script type='text/javascript' src='/media/js/jquery/jquery-1.12.4.min.js'></script>
+	<script type='text/javascript' src='/media/js/jquery/jquery-migrate-1.2.1.min.js'></script>
+	<script type='text/javascript' src='/media/js/third-party.js'></script>
+	<script type='text/javascript' src='/media/js/general.js'></script>		
+	<style type="text/css">html{background:#ffffff!important;}</style>
+	<link href="/media/css/fonts.css" rel="stylesheet" type="text/css"/>
+  	<link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	
+  <style type="text/css">
+		#logo img{display:none;}.site-title{display:block!important;}.site-description{display:block!important;}
+	</style>
+	<link href="/media/css/shortcodes.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/custom.css" rel="stylesheet" type="text/css"/>
+	
+  	<script src="/media/js/enquire.js"></script>
+  	<script src="/media/js/application.js"></script>
+    <script src="/media/js/script.js"></script>
+    <script src="/media/js/jquery.cookie.js"></script>  
+    <script src="/media/js/script-jw.js"></script>
+  	<script src="/media/js/custom.js"></script>
+    
+	<script>
+        $(function() {
+            loadSite();
+          	$('body').prepend('<a href="#" class="back-totop">Back to Top</a>');
+        });
+	</script>
+</head>
+<body class="page page-id-65 page-template page-template-Template-Frontpage page-template-Template-Frontpage-php chrome alt-style-default layout-full">
+<div id="wrapper" class="site-wrapper">
+  <header id="main-header" class="navbar navbar-inverse" role="header">
+    [#Component("topbar")]
+    
+	<div id="header-wrapper" class="navbar-inner container ">
+      [#Component("header")]
+      <!-- <div class="home-main-pic col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs">
+	   	<div class="main-pic-div row">
+ 	    		
+	   	</div>
+	   	<div id="logo-wrap">
+	   		<a href="/"><img src="/media/images/logo_de.png" alt="DE Logo"></a>
+	   	</div>
+      </div> -->
+      [#Component("navigation")]
+        
+      [#Component("homesearch")]
+  	</div> 
+  </header>
+
+  <div class="site-content-wrap">
+	<div id="content" class="col-full">
+		<div id="main" class="col-left">
+			[!Content]
+  		</div>
+  	</div>
+  
+ 
+  <footer class="footer-wrap deback-red">
+	<div class="container-fluid footer clearfix">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="footerNav-new">
+					<ul class="container">
+						<li class="resp-no-pad col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<h4 class="de-white">For Makers</h4>
+							<ul class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<li class="footnav-bot-item"><a class="dehover-white sellwdefootlink" href="/maker">Sell With Direct Eats</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/maker-contact">Maker Contact Form</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/maker-faq">Maker FAQs</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="#" data-toggle="modal" data-target="#signinModal">Maker Log-In</a></li>
+							</ul>
+						</li>
+						<li class="resp-no-pad col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<h4 class="de-white">About Direct Eats</h4>
+							<ul class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<li class="footnav-bot-item"><a class="dehover-white" href="/about-us">About Us</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/contact-us">Contact Us</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/blog">Eater's Digest</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/how-to-shop">Shopping On Direct Eats</a></li>
+							</ul>
+						</li>
+						<li class="resp-no-pad col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<h4 class="de-white">Helpful Information</h4>
+								<ul class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<li class="footnav-bot-item"><a class="faqfootlink dehover-white" href="/faq">Frequently Asked Questions</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/privacy-policy">Privacy Policy</a></li>
+								<li class="footnav-bot-item"><a class="shipretfootlink dehover-white" href="/shipping-and-returns">Shipping &amp; Returns</a></li>
+								<li class="footnav-bot-item"><a class="dehover-white" href="/terms">User Agreement</a></li>
+							</ul>
+						</li>
+						<li class="resp-no-pad col-lg-3 col-md-3 col-sm-3 col-xs-12">
+							<h4 class="de-white">My Account</h4>
+							<ul class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<a class="footsign de-red" href="#" data-toggle="modal" data-target="#signinModal">Please Sign In</a>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="copyright-info">
+			<p class="de-white">
+			© Copyright 2015 Direct Eats. All Rights reserved.
+			</p>
+			</div>
+		</div>
+	</div>
+	<a href="#" class="back-totop" style="display: inline;">Back to Top</a>
+    <script type='text/javascript' src='/media/js/comment-reply.min.js'></script>
+    <script type='text/javascript' src='/media/js/jquery/jquery.flexslider-min-min.js'></script>
+    <script type='text/javascript' src='/media/js/jquery/lightbox-min.js'></script>
+    <script type='text/javascript' src='/media/js/bootstrap-min.js'></script>
+    <script type='text/javascript' src='/media/js/bootstrap-multiselect.js'></script>
+    <script type='text/javascript' src='/media/js/functions-min.js'></script>
+  </footer>
+    </div>
+</div>
+[#Macro("signinModal")]
+</body>
+</html>
