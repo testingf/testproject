@@ -1,0 +1,35 @@
+<div class="[@Html.AttrSafe(Title)]-banner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h2 class="lp-pagetitle">[@Title]</h2>
+  </div>
+  <div class="container">
+    <div class="row">
+      	[if @Title = "Pets"]
+          <h2 class="lp-pagetext">We’ve got the <b>natural & organic</b> products perfect for your furry friends</h2>
+      	[end if]
+        <div class="lp-cat-container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          [repeat @NavPath]
+          [if @NavPath.Title = @Title]
+          [if @NavPath.Children.Count > 0]
+          	[@colCount ="col-lg-6 col-md-6" ]
+            [if @NavPath.Children.Count > 2]
+          		[@colCount ="col-lg-4 col-md-4" ]
+          	[end if]
+            [repeat @NavPath.Children]
+            [@Child = @NavPath.Children]
+            [@ChildTitleSafe = @Html.AttrSafe(Child.Title)]
+            <div class="[@colCount] col-sm-6 col-xs-12">
+               <a href="[@Child.URL]"> <img src="/media/images/new-design/category/[@ChildTitleSafe].png"></a>
+                <h4>[@Child.Title]</h4>
+                <a href="[@Child.URL]">Shop Now ></a>
+            </div>
+            [end repeat]
+        [end if]
+        [end if]
+        [end repeat]
+        </div>
+      	<div class="upsell-products col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          	[@specials = String.Join(@Title, " Specials")]
+        	[#Macro("Home Category Carousel",@specials,@specials)]
+     	 </div>
+    </div>
+  </div>
